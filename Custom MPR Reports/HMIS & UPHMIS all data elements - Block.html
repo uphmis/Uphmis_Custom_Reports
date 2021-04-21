@@ -2329,21 +2329,21 @@ function dateFormatwithName(da) {
     let periodNameStart = dateFormatwithName(startDate);
 
   startDate = moment(startDate);
-    endDate = moment(endDate);
-    var result = [];
-    if (endDate.isBefore(startDate)) {
-        window.alert('Please select end date Accordinlgy');
-    }
-    var currentDate = startDate.clone();
-    while (currentDate.isBefore(endDate)) {
-        result.push(currentDate.format("YYYYMM"));
-        currentDate.add(1, 'month');
-    }
+//     endDate = moment(endDate);
+//     var result = [];
+//     if (endDate.isBefore(startDate)) {
+//         window.alert('Please select end date Accordinlgy');
+//     }
+//     var currentDate = startDate.clone();
+//     while (currentDate.isBefore(endDate)) {
+//         result.push(currentDate.format("YYYYMM"));
+//         currentDate.add(1, 'month');
+//     }
 
-    var date = ("" + result.join(";") + "");
+//     var date = ("" + result.join(";") + "");
 
 
-
+var date =  startDate.format("YYYYMM")
 
 
     function dateFormat(date) {

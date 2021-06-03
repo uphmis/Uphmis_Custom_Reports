@@ -1162,7 +1162,7 @@
             Stock status of Injectable Contraceptive MPA (vials)
           </td>
 
-          <td style="border: 1px solid black" width="64"></td>
+          <!-- <td style="border: 1px solid black" width="64"></td> -->
 
           <!-- ***********************************************************************HMIS ****************************************************************************-->
           <!-- ***********************************************************************HMIS ****************************************************************************-->
@@ -3152,6 +3152,12 @@
 <script>
   let allOrganisationUnits = [];
 
+  function sliptFunction(value) {
+    var str = value;
+    var res = str.split(":");
+    return res[0];
+  }
+
   async function getTodoItems() {
     try {
       const response = await axios.get(
@@ -3178,7 +3184,7 @@
       }
     });
 
-    return facilityType;
+    return sliptFunction(facilityType);
   }
 
   var url = window.location.href;
@@ -3203,20 +3209,27 @@
   let periodNameStart = dateFormatwithName(startDate);
 
   startDate = moment(startDate);
-  //     endDate = moment(endDate);
-  //     var result = [];
-  //     if (endDate.isBefore(startDate)) {
-  //         window.alert('Please select end date Accordinlgy');
-  //     }
-  //     var currentDate = startDate.clone();
-  //     while (currentDate.isBefore(endDate)) {
-  //         result.push(currentDate.format("YYYYMM"));
-  //         currentDate.add(1, 'month');
-  //     }
+      endDate = moment(endDate);
+      var result = [];
+      var date = "";
 
-  //     var date = ("" + result.join(";") + "");
+  if (endDate.isSame(startDate)) {
+    date = startDate.format("YYYYMM");
+  } else {
+    if (endDate.isBefore(startDate)) {
+      window.alert("Please select end date Accordinlgy");
+    } else {
+      var currentDate = startDate.clone();
+      while (currentDate.isBefore(endDate)) {
+        result.push(currentDate.format("YYYYMM"));
+        currentDate.add(1, "month");
+      }
 
-  var date = startDate.format("YYYYMM");
+      date = "" + result.join(";") + "";
+    }
+  }
+
+  // var date = startDate.format("YYYYMM");
 
   function dateFormat(date) {
     var dd = date.substring(8, 10);
@@ -4325,7 +4338,7 @@
           ) {
             count++;
 
-            finalvalue(response, response1, ouidName, count);
+            finalvalue(response, response1, ouidName, filterFacilityType(ouidName), count);
           });
         });
       });
@@ -4353,7 +4366,7 @@
     });
   });
 
-  function finalvalue(res4, res5, ouidName, count) {
+  function finalvalue(res4, res5, ouidName, facilityType, count) {
     valuea = datavalue2(res4, "FIaGENXR3c5.Ti9FJqkSK6J");
     valueb = datavalue(res4, "fqM6fGLUqVD.Ti9FJqkSK6J");
     valuec = datavalue(res4, "dH57At01u6e.Ti9FJqkSK6J");
@@ -5300,7 +5313,7 @@
       "</td><td>" +
       ouidName +
       "</td><td>" +
-      filterFacilityType(ouidName) +
+        facilityType +
       "</td><td>" +
       valuea +
       "</td><td>" +
@@ -5905,8 +5918,8 @@
       value298 +
       "</td><td>" +
       value299 +
-      "</td><td>" +
-      value300 +
+      // "</td><td>" +
+      // value300 +
       "</td><td>" +
       value301 +
       "</td><td>" +

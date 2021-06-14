@@ -3203,10 +3203,10 @@
     dateFormat(startDate) + "-To-" + dateFormat(endDate);
 
   function dateFormatwithName(da) {
-    return moment(da, "YYYY-MM-DD").format("MMM-YY");
+    return moment(da, "YYYY-MM-DD").format("MMMM YY");
   }
 
-  let periodNameStart = dateFormatwithName(startDate);
+  let periodNameStart = dateFormatwithName(startDate) + ' to ' + dateFormatwithName(endDate);
 
   startDate = moment(startDate);
       endDate = moment(endDate);
